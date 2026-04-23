@@ -1,12 +1,3 @@
-/* 
-
-Escola-v04.c, 29/08/2018, Autor: Renato Novais
-
-Descrição: esta versão tem:
-- lista encadeada
-
-*/
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -24,12 +15,12 @@ typedef struct dma {
   int ano; 
 } Data; 
 
-/*Criando a struct aluno */
+
 typedef struct dados_aluno
 {
   int matricula;
   char nome[50];
-  char sexo; //M - Masculino, F - Feminino
+  char sexo; 
   Data data_nascimento;
   char cpf[15];
   struct dados_aluno *prox;
@@ -46,9 +37,9 @@ int valida_data_numeros(int dia, int mes, int ano);
 int main(void)
 {    
  
-  Aluno aluno; /*Criando a variável aluno que será do tipo struct Ficha_Aluno */
-  Aluno* inicioLista = NULL; // 
-  int qtd_alunos = 0; // variável para controlar a quantidade de alunos cadastrados
+  Aluno aluno; 
+  Aluno* inicioLista = NULL; 
+  int qtd_alunos = 0;
 
   int opcao, retorno;
   int sair = 0;
@@ -136,14 +127,14 @@ void inserirAlunoNaLista(Aluno** inicio, Aluno* novoAluno){
 
 int inserirAluno(Aluno** inicio){
     
-    //criar o aluno
+ 
     Aluno* novoAluno = (Aluno *)malloc(sizeof(Aluno));
     
     inserirAlunoNaLista(inicio, novoAluno);
     
     printf("\n### Cadastro de Aluno ###\n");
     printf("Digite a matrícula: ");
-    //scanf("%d", &lista_aluno[qtd_alunos].matricula);
+   
     scanf("%d", &novoAluno->matricula);
     getchar();
     
@@ -153,10 +144,8 @@ int inserirAluno(Aluno** inicio){
     
     printf("Digite o nome: ");
     fgets(novoAluno->nome, 50, stdin); 
-    /*o fgets é uma das funções mais indicadas para ler string do teclado. 
-    Ela controla o tamanho do buffer, e não deixa o buffer com lixo. 
-    Entretanto ela guarda o \n ao final da string, por isso é preciso removê-lo, como feito a seguir*/
-    size_t ln = strlen(novoAluno->nome) - 1; //size_t = unsigned integer type
+    
+    size_t ln = strlen(novoAluno->nome) - 1; 
     if (novoAluno->nome[ln] == '\n')
         novoAluno->nome[ln] = '\0';
     
@@ -168,8 +157,6 @@ int inserirAluno(Aluno** inicio){
         return ERRO_CADASTRO_SEXO;
     }
     
-    /* obs. a data nascimento será recuperada separadamente o dia, mês e ano, 
-        mas depois tem que mudar para informar uma string dd/mm/aaaa, e validar a data*/
     
     char data[11];
     printf("Digite a data de nascimento: ");
@@ -255,10 +242,9 @@ int validar_data(char data[]){
     char sMes[3];
     char sAno[5];
     
-    // data = "/02/2019"
-    
+
     int i;
-    //converter
+
     for (i = 0; data[i] != '/' && i < 2; i++){
         sDia[i] = data[i];
         
@@ -268,12 +254,9 @@ int validar_data(char data[]){
     
 
     
-    //usar o atoi ou algo do tipo dia = "03" - '0';
-    iDia = atoi(sDia); //sDia - '0';
     
-    
-    
-    //validar
+    iDia = atoi(sDia); 
+
     int retorno = valida_data_numeros(dia, mes, ano);
     
     return retorno;
